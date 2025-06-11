@@ -1,4 +1,5 @@
-document.querySelectorAll('.filters button').forEach(btn=>{
+document.addEventListener('DOMContentLoaded', ()=> {
+    document.querySelectorAll('.filters button').forEach(btn=>{
     btn.addEventListener('click',()=>{
         document.querySelector('.filters .active')?.classList.remove('active');
         btn.classList.add('active');
@@ -107,8 +108,26 @@ function updateOrderSummary() {
     });
 }
 
-document.querySelector('.confirm-order').addEventListener('click', () => {
-    window.location.href = 'confirmation.html';
+// Add this to your meals.js (where you handle the confirm order button)
+document.querySelector('.confirm-order').addEventListener('click', function() {
+    const orderItems = Array.from(document.querySelectorAll('.order-item')).map(item => {
+        return {
+            name: item.querySelector('.item-name').textContent,
+            price: parseFloat(item.querySelector('.item-price').textContent),
+            quantity: parseInt(item.querySelector('.item-quantity').textContent)
+        };
+    });
+    
+    const order = {
+        id: Date.now(), // Generate a unique order ID
+        items: orderItems,
+        total: parseFloat(document.querySelector('.order-total-price').textContent),
+        status: 'pending',
+        timestamp: new Date().toISOString()
+    };
+    
+    localStorage.setItem('currentOrder', JSON.stringify(order));
+    window.location.href = 'confirm.html';
 });
 
 const toggleButton = document.querySelector('.toggle-order-details');
@@ -195,6 +214,7 @@ function updateOrderSummary() {
 
         sessionStorage.setItem('currentOrder', JSON.stringify(orderData));
 
-        window.location.href = 'confirmation.html';
+        window.location.href = 'confirm.html';
     });
 }
+});

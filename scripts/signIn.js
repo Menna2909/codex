@@ -4,9 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Simple credentials for demo purposes
     const credentials = {
-        student: { email: "student@school.edu", password: "student123" },
-        chief: { email: "chef@frymetothemoon.com", password: "chef123" },
-        cashier: { email: "cashier@frymetothemoon.com", password: "cashier123" }
+        student: { 
+            email: "student@school.edu", 
+            password: "student123",
+            redirectPage: "student.html" 
+        },
+        chief: { 
+            email: "chef@frymetothemoon.com", 
+            password: "chef123",
+            redirectPage: "chef.html" 
+        },
+        cashier: { 
+            email: "cashier@frymetothemoon.com", 
+            password: "cashier123",
+            redirectPage: "cashier.html" 
+        }
     };
     
     // Role selection functionality
@@ -34,10 +46,34 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (emailInput.value === credentials[role].email && 
                 passwordInput.value === credentials[role].password) {
-                alert(`Successfully logged in as ${role}! Redirecting...`);
-                window.location.href = '../index.html';
+                
+                // Show success message
+                const successMsg = document.createElement('div');
+                successMsg.className = 'login-success';
+                successMsg.innerHTML = `✓ Successfully logged in as ${role}! Redirecting...`;
+                
+                // Clear previous messages
+                const existingMsg = form.querySelector('.login-error, .login-success');
+                if (existingMsg) form.removeChild(existingMsg);
+                
+                form.appendChild(successMsg);
+                
+                // Redirect to role-specific page after 1 second
+                setTimeout(() => {
+                    window.location.href = credentials[role].redirectPage;
+                }, 1000);
+                
             } else {
-                alert('Invalid credentials. Please try again.');
+                // Show error message
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'login-error';
+                errorMsg.textContent = 'Invalid credentials. Please try again.';
+                
+                // Clear previous messages
+                const existingMsg = form.querySelector('.login-error, .login-success');
+                if (existingMsg) form.removeChild(existingMsg);
+                
+                form.appendChild(errorMsg);
             }
         });
     });
