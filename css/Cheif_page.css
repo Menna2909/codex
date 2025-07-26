@@ -118,6 +118,7 @@ header {
 
 .order-actions {
     text-align: right;
+    color: #23d935;
 }
 
 .complete-btn {
@@ -137,7 +138,7 @@ header {
 }
 
 .completed-badge {
-    background-color: #4CAF50;
+    background-color: #1adb20;
     color: white;
     padding: 5px 10px;
     border-radius: 15px;
@@ -173,4 +174,15 @@ footer {
 .copyright {
     font-size: 0.9rem;
     color: #aaa;
+}
+/* New class for completed state */
+.complete-btn.completed {
+    background-color: #23d935; /* Green color */
+    color: white;
+}
+
+/* Optional: Disable hover effects when completed */
+.complete-btn.completed:hover {
+    background-color: #23d935;
+    transform: none;
 }

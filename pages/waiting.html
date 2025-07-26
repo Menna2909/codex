@@ -13,12 +13,22 @@
             startTime = new Date();
         };
 
-        // Calculate and display the waiting time
+        // Calculate waiting time and redirect to feedback.html
         function takeOrder() {
             const endTime = new Date();
             const waitingTime = Math.floor((endTime - startTime) / 1000); // in seconds
-            document.getElementById("waiting-result").innerText = `Thank you for waiting! Your order is ready. You waited ${waitingTime} seconds.`;
-            document.getElementById("take-order-button").style.display = "none"; // Hide the button
+            
+            // Store waiting time for use on the feedback page (optional)
+            localStorage.setItem("waitingTime", waitingTime);
+            
+            // Redirect to feedback.html after 2 seconds (for user to read the message)
+            setTimeout(() => {
+                window.location.href = "Feedback.html";
+            }, 2000);
+            
+            // Display message and hide button
+            document.getElementById("waiting-result").innerText = `Thank you for waiting! You waited ${waitingTime} seconds. Redirecting to feedback...`;
+            document.getElementById("take-order-button").style.display = "none";
         }
     </script>
 </head>
@@ -29,7 +39,7 @@
             <span>Fry me to the Moon</span>
         </div>
         <div class="header-buttons">
-            <a href="./signIn.html" class="login">Logout</a>
+            <a href="../index.html" class="login">Logout</a>
             <a href="#" class="cart"><i class="fas fa-shopping-cart"></i> Cart</a>
         </div>
     </header>

@@ -7,17 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
         student: { 
             email: "student@school.edu", 
             password: "student123",
-            redirectPage: "student.html" 
+            redirectPage: "pages/student.html" 
         },
         chief: { 
             email: "chef@frymetothemoon.com", 
             password: "chef123",
-            redirectPage: "chef.html" 
+            redirectPage: "pages/chef.html" 
         },
         cashier: { 
             email: "cashier@frymetothemoon.com", 
             password: "cashier123",
-            redirectPage: "cashier.html" 
+            redirectPage: "pages/cashier.html" 
         }
     };
     
